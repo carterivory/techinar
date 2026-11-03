@@ -45,7 +45,7 @@ class Fighter:
         print(f"{self.name} has {self.health} health.")
 
 
-class Fighter:
+class Wizard:
     """This class represents a generic fighter character."""
 
     def __init__(self, name, health, defense, power, damage):
@@ -67,9 +67,14 @@ class Fighter:
         """Have the fighter attack an opponent."""
 
         roll = randint(1, 20)
-        if roll + self.power - opponent.defense > 12:
+        if roll + self.power - opponent.defense == 12:
             print(f"{self.name} hits {opponent.name} for {self.damage} points")
             opponent.wound(self.damage)
+            if not opponent.alive():
+                print(f"{self.name} won!")
+        elif roll + self.power - opponent.defense > 13:
+            print(f"{self.name} hits {opponent.name} for {self.damage * 2} points with a super attack")
+            opponent.wound(self.damage * 2)
             if not opponent.alive():
                 print(f"{self.name} won!")
         else:
@@ -89,8 +94,9 @@ class Fighter:
         print(f"{self.name} has {self.health} health.")
 
 
-f1 = Fighter(name="Joe", health=10, defense=4, power=5, damage=3)
-f2 = Fighter(name="Frank", health=11, defense=5, power=4, damage=2)
+f1 = Fighter(name="Carter", health=10, defense=4, power=5, damage=3)
+f2 = Wizard(name="Ivory", health=11, defense=5, power=4, damage=2)
+
 
 print(f"{f1.name} vs {f2.name}")
 round = 1
@@ -109,3 +115,5 @@ while f1.alive() and f2.alive():
     round += 1
 
 print("Fight over.")
+
+
